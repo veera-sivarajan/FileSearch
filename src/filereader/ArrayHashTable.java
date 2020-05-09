@@ -2,7 +2,7 @@ package filereader;
 
 public class ArrayHashTable<V> {
   private static int size;
-  private V[] array;
+  private static V[] array;
   private static int capacity;
   private double loadFactor; 
 
@@ -24,8 +24,16 @@ public class ArrayHashTable<V> {
     return size == 0;
   }
     
-  public int hashCode(int key) {
-    return key % capacity;
+  public static int hashString(V word) {
+    int hash = 7;
+    for(char c : word) {
+      hash = (hash * 31) + c;
+    }
+    return hash;
+  }
+
+  public static int getIndex(V word) {
+    return hashString(word) % size;
   }
 
   public double loadFactor() {
@@ -33,9 +41,9 @@ public class ArrayHashTable<V> {
     return loadFactor;
   }
 
-  public void add(int key, V value) {
+  public void add(V value) {
     size += 1;
-    int index = hashCode(key);
+    int index = getIndex(value); 
     while(array[index] != null) {
       index += 1;
     }
@@ -44,7 +52,7 @@ public class ArrayHashTable<V> {
   }
   
   public V find(int key, V value) {
-    int index = hashCode(key);
+    int index = stringHash(key);
     System.out.println("Finding element at: " + index);
     return array[index];
   }

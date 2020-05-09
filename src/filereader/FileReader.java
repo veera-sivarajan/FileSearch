@@ -7,11 +7,12 @@ import java.io.FileNotFoundException;
 public class FileReader {
   private String file;
   private static int wordCount;
-  private static ArrayHashTable<String> table = new ArrayHashTable<String>(50);
- 
+  private static ArrayHashTable<String> table; 
+
   public FileReader(String file) {
     this.file = "/home/veera/Projects/FileSearch/src/filereader/" + file;
     this.wordCount = 0;
+    table = new ArrayHashTable<String>(100);
   }
  
   public void getWords() throws FileNotFoundException {

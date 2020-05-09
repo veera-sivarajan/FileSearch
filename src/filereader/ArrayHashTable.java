@@ -24,6 +24,10 @@ public class ArrayHashTable<V> {
     return size == 0;
   }
     
+  public static double getLoadFactor() {
+    return loadFactor;
+  }
+
   public static int hashString(V word) {
     int hash = 7;
     for(char c : word) {
@@ -36,13 +40,13 @@ public class ArrayHashTable<V> {
     return hashString(word) % size;
   }
 
-  public double loadFactor() {
+  private static double updateLoadFactor() {
     loadFactor = size / capacity;
-    return loadFactor;
   }
 
   public void add(V value) {
     size += 1;
+    upadateLoadFactor();
     int index = getIndex(value); 
     while(array[index] != null) {
       index += 1;

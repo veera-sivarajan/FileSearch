@@ -29,8 +29,19 @@ public class FileReader {
   }
   
   public static void main(String[] args) throws FileNotFoundException {
-    FileReader read = new FileReader("test.txt");
-    read.getWords();
+    Scanner input = new Scanner(System.in);
+    System.out.println("Enter three file name: ");
+    String file1 = input.next();
+    String file2 = input.next();
+    String file3 = input.next();
+    System.out.println("Enter search term: ");
+    String searchTerm = input.next();
+    FileReader read1 = new FileReader(file1);
+    FileReader read2 = new FileReader(file2);
+    FileReader read3 = new FileReader(file3);
+    read1.getWords();
+    read2.getWords();
+    read3.getWords();
     System.out.println("Word count: " + wordCount);
   } 
 }

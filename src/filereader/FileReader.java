@@ -29,12 +29,25 @@ public class FileReader {
   public void addToTable(String word) {
     table.add(word);
   }
+
+  public int find(String word) {
+    return table.numOfOccur(word);
+  }
   
-  public static void main(String[] args) throws FileNotFoundException {
+  /* public static void main(String[] args) throws FileNotFoundException {
+    System.out.println("Entering main()");
     Scanner input = new Scanner(System.in);
-    System.out.println("Enter file name: ");
+    System.out.println("Enter file1 name: ");
     String fileName = input.nextLine();
     FileReader reader = new FileReader(fileName);
+    System.out.println("Enter file1 name: ");
+    System.out.println("Enter file1 name: ");
+    String fileName = input.nextLine();
+    String fileName = input.nextLine();
     reader.getWords();
-  }
+    System.out.println("Enter search term: ");
+    String searchTerm = input.nextLine();
+    int count = reader.find(searchTerm);
+    System.out.println("Count: " + count);
+  } */
 }

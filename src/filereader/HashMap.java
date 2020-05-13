@@ -1,5 +1,7 @@
 package filereader;
 
+import java.util.ArrayList;
+
 public class HashMap<V> {
 
   private ArrayList<HashNode<V>> array;
@@ -7,9 +9,9 @@ public class HashMap<V> {
   private int capacity;
 
   public HashMap() {
-    array = new ArrayList<HashNode<V>>;
+    array = new ArrayList<HashNode<V>>();
     size = 0;
-    this.capacity = capacity; 
+    this.capacity = 1000; 
 
     for(int i = 0; i < capacity; ++i) 
       array.add(null);
@@ -18,8 +20,8 @@ public class HashMap<V> {
   private int hashString(V data) {
     String word = data.toString();
     int hash = 7;
-    for(int i = 0; i < word.length; ++i) {
-      hash = (hash * 31) + charAt(i);
+    for(int i = 0; i < word.length(); ++i) {
+      hash = (hash * 31) + word.charAt(i);
     }
     return hash;
   }
@@ -32,23 +34,19 @@ public class HashMap<V> {
 
   public void add(V data) {
     int index = getIndex(data);
-    HashNode<V> addNode = new HashNode<V>(data);
-    if(array[index] != null) {
-      HashNode<V> head = array[index];
-      while(head.getLink() != null)
-        head.getLink();
-      head.setLink(addNode);
-    }
-    else {
-      array[index] = addNode;
-    }
+    HashNode<V> head = array.get(index);
+    HashNode<V> toAdd = new HashNode<V>(data);
+    toAdd.setLink(head);
+    array.set(index, toAdd);
   }
 
   public int numOfOccur(V data) {
     int index = getIndex(data);
+    HashNode<V> head = array.get(index);
     int count = 0;
-    while(array[index].link != null) {
+    while(head != null) {
       count += 1;
+      head = head.getLink();
     }
     return count;
   }

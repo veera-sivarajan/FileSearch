@@ -6,42 +6,35 @@ import java.io.FileNotFoundException;
 
 public class FileReader {
   private String file;
-  private static int wordCount;
-  private static ArrayHashTable<String> table; 
+  private  int wordCount;
+  private HashMap<String> table;
 
   public FileReader(String file) {
     this.file = "/home/veera/Projects/FileSearch/src/filereader/" + file;
     this.wordCount = 0;
-    table = new ArrayHashTable<String>(100);
+    table = new HashMap<String>();
   }
  
   public void getWords() throws FileNotFoundException {
+    System.out.println("Entering getWords()");
     Scanner input = new Scanner(new File(file));
     while(input.hasNext()) {
       String word = input.next();
       wordCount += 1;
+      System.out.println("Word: " + word);
       addToTable(word);
     }
   }
   
-  public static void addToTable(String word) {
-    table.add(1, word);
+  public void addToTable(String word) {
+    table.add(word);
   }
   
   public static void main(String[] args) throws FileNotFoundException {
     Scanner input = new Scanner(System.in);
-    System.out.println("Enter three file name: ");
-    String file1 = input.next();
-    String file2 = input.next();
-    String file3 = input.next();
-    System.out.println("Enter search term: ");
-    String searchTerm = input.next();
-    FileReader read1 = new FileReader(file1);
-    FileReader read2 = new FileReader(file2);
-    FileReader read3 = new FileReader(file3);
-    read1.getWords();
-    read2.getWords();
-    read3.getWords();
-    System.out.println("Word count: " + wordCount);
-  } 
+    System.out.println("Enter file name: ");
+    String fileName = input.nextLine();
+    FileReader reader = new FileReader(fileName);
+    reader.getWords();
+  }
 }

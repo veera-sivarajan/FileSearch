@@ -5,12 +5,10 @@ import java.util.ArrayList;
 public class HashMap<V> {
 
   private ArrayList<HashNode<V>> array;
-  private int size;
   private int capacity;
 
   public HashMap() {
     array = new ArrayList<HashNode<V>>();
-    size = 0;
     this.capacity = 1000; 
 
     for(int i = 0; i < capacity; ++i) 
@@ -29,11 +27,13 @@ public class HashMap<V> {
   private int getIndex(V data) {
     int hash = hashString(data);
     int index = hash % capacity;
-    return index;
+    return Math.abs(index);
   }
 
   public void add(V data) {
     int index = getIndex(data);
+    System.out.println("HashMap Add Method");
+    System.out.println("Index: " + index);
     HashNode<V> head = array.get(index);
     HashNode<V> toAdd = new HashNode<V>(data);
     toAdd.setLink(head);

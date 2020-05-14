@@ -1,1 +1,0 @@
-hello world. This is test file. I'm checking the number of times the word hello is mentionedin this file. I'll be happy if the result is two as that's the correct answer. 

@@ -32,8 +32,6 @@ public class HashMap<V> {
 
   public void add(V data) {
     int index = getIndex(data);
-    System.out.println("HashMap Add Method");
-    System.out.println("Index: " + index);
     HashNode<V> head = array.get(index);
     HashNode<V> toAdd = new HashNode<V>(data);
     toAdd.setLink(head);

@@ -6,24 +6,20 @@ import java.io.FileNotFoundException;
 
 public class FileReader {
   private String file;
-  private  int wordCount;
   private HashMap<String> table;
 
   public FileReader(String file) {
-    this.file = "/home/veera/Projects/FileSearch/src/filereader/" + file;
-    this.wordCount = 0;
+    this.file = "/home/veera/Projects/FileSearch/test/" + file;
     table = new HashMap<String>();
   }
  
   public void getWords() throws FileNotFoundException {
-    System.out.println("Entering getWords()");
     Scanner input = new Scanner(new File(file));
     while(input.hasNext()) {
       String word = input.next();
-      wordCount += 1;
-      System.out.println("Word: " + word);
       addToTable(word);
     }
+    input.close();
   }
   
   public void addToTable(String word) {
@@ -34,20 +30,22 @@ public class FileReader {
     return table.numOfOccur(word);
   }
   
-  /* public static void main(String[] args) throws FileNotFoundException {
-    System.out.println("Entering main()");
-    Scanner input = new Scanner(System.in);
-    System.out.println("Enter file1 name: ");
-    String fileName = input.nextLine();
-    FileReader reader = new FileReader(fileName);
-    System.out.println("Enter file1 name: ");
-    System.out.println("Enter file1 name: ");
-    String fileName = input.nextLine();
-    String fileName = input.nextLine();
-    reader.getWords();
+  public static void main(String[] args) throws FileNotFoundException {
+    int largeCount = -1;
+    String largeFile = "none";
     System.out.println("Enter search term: ");
+    Scanner input = new Scanner(System.in);
     String searchTerm = input.nextLine();
-    int count = reader.find(searchTerm);
-    System.out.println("Count: " + count);
-  } */
+    for(String file : args) {
+      FileReader reader = new FileReader(file);
+      reader.getWords();
+      int count = reader.find(searchTerm);
+      if(count > largeCount) {
+        largeCount = count;
+        largeFile = file;
+      }
+    }
+    System.out.println("File: " + largeFile);
+    input.close();
+  }
 }
